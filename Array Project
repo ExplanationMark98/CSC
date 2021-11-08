@@ -1,0 +1,88 @@
+#include <iostream>
+#include <cstring>
+#include <array>
+#include <fstream>
+#include <iomanip>
+using namespace std;
+
+string names[5];
+double milesperday[5][7];
+double totalrun[5], average[5];
+
+void readfile();
+double* mathfunction(double milesperday[5][7]);
+void output(string names[], double milesperday[5][7], double totalrun[], double average[]);
+
+int main()
+{
+  readfile();
+  mathfunction(milesperday);
+ output(names, milesperday, totalrun, average);
+ return 0;
+}
+
+void readfile()
+{
+  int x, y;
+  ifstream myfile;
+  string stringtest[8];
+  double arr[8];
+  myfile.open("runners.txt");
+  if (myfile.is_open())
+  {
+    for (int i = 0; i < 5; i++)
+    {
+      
+    getline(myfile, stringtest [i]);
+    names[i] = stringtest[i].substr(0, stringtest[i].find_first_of(' '));
+   stringtest[i].erase(0, stringtest[i].find_first_of(' '));
+   //cout << stringtest[i] << endl;
+    }
+ 
+}
+myfile.close();
+for (int i = 0; i < 5; i++)
+    {
+
+        for (int j = 0; j < 7; j++)
+        {
+            milesperday[i][j] = stod(stringtest[i].substr(3*j+1, 4));
+        }
+    }
+
+ 
+
+ int runner = x-1;
+ 
+ string name = names[runner];
+ 
+ 
+
+}
+
+double* mathfunction(double milesperday[5][7])
+{
+  for (int i = 0; i< 5; i++)
+  {
+  for (int j = 0; j < 7; j++)
+        {
+            totalrun[i] +=milesperday[i][j];
+        average[i] = totalrun[i] / 7;
+        }
+  }
+return totalrun, average;
+}
+
+void output(string names[], double milesperday[5][7], double totalrun[], double average[])
+{
+ for (int i = 0; i < 5; i++)
+    {
+        cout<<endl<<names[i]<<endl<<setw(9)<<"Sunday "<<"Monday "<<"Tuesday "<<"Wednesday "<<"Thursday "<<"Friday "<<"Satuday "<<endl;
+        for (int j = 0; j < 7; j++)
+        {
+          cout<<setw(8)<<milesperday[i][j];
+        }
+        cout << "\nTotal miles run for week: " << totalrun[i]<<" Miles\n"<<
+        "Daily average: "<< average[i]<<" Miles";
+    }
+}
